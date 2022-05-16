@@ -91,7 +91,15 @@ export default {
             icon: 'warning',
             message: 'Password tidak boleh kosong'
           })
-        }else if(pass.value != pass_conf.value){
+        }else if (pass.value.length < 6 && pass_conf.value.length < 6) {
+          $q.notify({
+                      color: 'red-5',
+                      textColor: 'white',
+                      icon: 'warning',
+                      message: 'Password Minimal 6 !'
+          })
+        }
+        else if(pass.value != pass_conf.value){
           $q.notify({
                       color: 'red-5',
                       textColor: 'white',
