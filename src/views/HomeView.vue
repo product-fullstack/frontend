@@ -4,20 +4,20 @@ background-position: center; background-size: cover;position:absolute;width:100%
   <q-layout view="lHh Lpr lFf" style="background:rgba(157, 141, 141, 0);">
     <q-page-container>
     <div class="row q-mt-lg">
-      <div class="col-12 col-md-2 q-ml-lg" v-if="mode == 'table'">
+      <div class="col-12 col-md-5 q-ml-lg" v-if="mode == 'table'">
         <q-btn color="primary" @click="mode = 'form'" label="tambah produk" rounded />
       </div>
       <div class="col-12 col-md-2 q-ml-lg" v-else-if="mode == 'form'">
         <q-btn color="primary" @click="mode = 'table'" label="back" rounded />
       </div>
-      <div class="col-12 col-md-3">
+      <!-- <div class="col-12 col-md-3">
       <q-btn color="warning" @click="logout()" label="Logout" rounded />
 
-      </div>
-      <div class="col-12 col-md-4">
+      </div> -->
+      <!-- <div class="col-12 col-md-4">
        <span v-if="mode == 'table'"> Tabel Data Produk</span>
 
-      </div>
+      </div> -->
       <!-- <div class="col-12 col-md-2">
        Hallo {{dataUser.nama}}
 
@@ -174,7 +174,7 @@ const columns = [
     required: true,
     label: 'Harga',
     align: 'left',
-    field: row => row.harga,
+    field: row => 'Rp.' + new Intl.NumberFormat().format(row.harga),
     format: val => `${val}`,
     sortable: true
   },
@@ -183,7 +183,7 @@ const columns = [
     required: true,
     label: 'Total Harga',
     align: 'left',
-    field: row => row.total_harga,
+    field: row => 'Rp.'+ new Intl.NumberFormat().format(row.total_harga),
     format: val => `${val}`,
     sortable: true
   },
@@ -297,14 +297,12 @@ export default {
     },
     addproduk(){
         let token = this.$q.localStorage.getItem('token')
-        let total_harga = this.qty * this.harga
         api.post('/produk',
         {
           nama : this.nama,
           kategori : this.kategori,
           qty : this.qty,
           harga : this.harga,
-          total_harga: total_harga
         },
         { headers: {"Authorization" : `Bearer ${token}`}}).then(res =>{
                 // this.mode = 'table'

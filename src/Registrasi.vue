@@ -30,11 +30,11 @@ background-position: center; background-size: cover;position:absolute;width:100%
                   </div>
                 </div>
                 <div class="row q-mt-lg">
-                   <div class="col-3">
+                   <div class="col-5 col-md-3">
                        <q-btn type="submit" unelevated rounded color="warning" label="Registrasi" />
                     </div>
-                    <div class="col-6">
-                        <router-link to="/">Apakah punya user ? Silahkan Login </router-link>
+                    <div class="col-3 col-md-4">
+                        <router-link to="/"> <q-btn unelevated rounded color="primary" label="Login ?" /></router-link>
                     </div>
                    
                 </div>

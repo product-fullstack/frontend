@@ -2,7 +2,7 @@
 <div style="background-image: url('https://i.ibb.co/df6PrbM/bg.jpg');
 background-position: center; background-size: cover;position:absolute;width:100%">
   <q-layout view="lHh Lpr lFf" style="background:rgba(157, 141, 141, 0);">
-    <q-page-container class="flex flex-center">
+    <q-page-container padding class="flex flex-center">
         <h4 style="color:#027BE3;">Selamat Datang, {{dataUser.nama}}</h4>
     </q-page-container>
   </q-layout>

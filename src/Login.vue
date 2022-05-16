@@ -39,7 +39,7 @@ background-position: center; background-size: cover;position:absolute;width:100%
 
 import { ref } from 'vue'
 import { useQuasar } from 'quasar'
-import { useRouter} from 'vue-router'
+// import { useRouter} from 'vue-router'
 import {api} from '@/basepath/axios'
 
 export default {
@@ -49,62 +49,62 @@ export default {
     // HelloWorld
   },
 
-  setup () {
-    const $q = useQuasar()
+  data () {
+    
     const user = ref(null)
     const pass = ref(null)
-    const router = useRouter()
+    // const router = useRouter()
     return {
 
       user,
       pass,
       isPwd: ref(true),
-      Login () {
-        if (!user.value) {
-        router.push({path:'/'})
+    
 
-          $q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'warning',
-            message: 'User tidak boleh kosong'
-          })
-        }else if (!pass.value) {
-            $q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'warning',
-            message: 'Password tidak boleh kosong'
-          })
+    }
+  },
+  methods: {
+    $q : useQuasar(),
+      Login () {
+        if (!this.user) {
+        this.$router.push({path:'/'})
+          this.$swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Username Kosong !',
+          });
+        }else if (!this.pass) {
+          this.$swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Password Kosong !',
+          });
         }else {
            api.post('/login',{
-                username  : user.value,
-                password : pass.value
-            }).then(function (res){
+                username  : this.user,
+                password : this.pass
+            }).then(res => {
                 // console.log(res.data);
-                $q.localStorage.set('token',res.data.access_token)
-                router.push({path:'/home'})
-                $q.notify({
+                this.$q.localStorage.set('token',res.data.access_token)
+                this.$router.push({path:'/home'})
+                this.$q.notify({
                     color: 'green-4',
                     textColor: 'white',
                     icon: 'cloud_done',
                     message: "Login Berhasil"
                 })
-            }).catch(function (error) {
-                if (error.response.data.user == "Not Found") {
-                    $q.notify({
-                    color: 'red-5',
-                    textColor: 'white',
-                    icon: 'warning',
-                    message: "User tidak terdaftar",
-                })
-                }
+            }).catch(error => {
+                // if (error.response.data.user == "Not Found") {
+                this.$swal({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'User '+error.response.data.user,
+                  });
+                // }
               })
            
         }
       },
-
-    }
   },
   mounted(){
     if (localStorage.getItem("token") == null) {
