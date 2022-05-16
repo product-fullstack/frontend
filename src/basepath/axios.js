@@ -3,7 +3,7 @@
 import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 
-const api = axios.create({ baseURL: 'http://101.255.165.82:8021/api' })
+const api = axios.create({ baseURL: 'http://101.255.165.82:8020/api' })
 
 export default boot(({ app }) => {
   app.config.globalProperties.$axios = axios
