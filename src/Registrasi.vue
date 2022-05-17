@@ -121,7 +121,7 @@ export default {
                 color: 'green-4',
                 textColor: 'white',
                 icon: 'cloud_done',
-                message: "Login Berhasil,Silahkan Login"
+                message: "Registrasi Berhasil,Silahkan Login"
             })
         }
       },
